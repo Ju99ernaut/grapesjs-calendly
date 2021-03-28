@@ -2,7 +2,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const pkg = require('./package.json');
 const webpack = require('webpack');
 const path = require('path');
-const fs = require('fs');
+const fs = require('fs'); 
 const name = pkg.name;
 let plugins = [];
 

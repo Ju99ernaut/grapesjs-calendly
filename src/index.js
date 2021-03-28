@@ -3,12 +3,12 @@ import loadComponents from './components';
 import loadBlocks from './blocks';
 import styles from './styles';
 
-export default grapesjs.plugins.add('grapesjs-shape-divider', (editor, opts = {}) => {
+export default grapesjs.plugins.add('grapesjs-calendly', (editor, opts = {}) => {
   const options = { ...{
   // let c = opts;
   //
   // let defaults = {
-    shapedividerBlock: {},
+    calendlyBlock: {},
 
     // Default style
     defaultStyle: true,
@@ -17,7 +17,7 @@ export default grapesjs.plugins.add('grapesjs-shape-divider', (editor, opts = {}
     sectionClsPfx: 'gjs',
 
     // Shp-divder label
-    labelShapeDvd: 'Shape Divider',
+    // labelShapeDvd: 'Shape Divider',
 
     // Shp-divder category label
     labelSectionCategory: 'Selection',
@@ -26,35 +26,18 @@ export default grapesjs.plugins.add('grapesjs-shape-divider', (editor, opts = {}
     labelSvg: 'svg',
 
     //labelType
-    labelType: 'shape-divider',
+    labelType: 'calendly',
 
     style: `
-      .gjs-shape-divider{
-        position:absolute;
-        width:100%;
-        height:100px;
-        color:black;
-        overflow:hidden;
-      }
-      .gjs-shape-divider > svg{
-        height:100%;
-        width:100%;
-        transform:scaleY(-1);
-      }
-      .gjs-shape-divider--fl-v > svg{
-        transform:scaleY(1);
-      }
-      .gjs-shape-divider--fl-h > svg{
-        transform:scaleX(-1) scaleY(-1);
-      }
-      .gjs-shape-divider--fl-v-h > svg{
-        transform:scaleY(1) scaleX(-1);
-      }
-      .gjs-shape-divider > svg > path{
-        fill:currentColor;
-      }
-      .gjs-shape-divider-inv > path{
-        transform:scale(-1, -1) translate(-100%, -100%);
+      .gpd-calendly-btn-st{
+        background-color:#3c9cde;
+        color:#FFF;
+        padding:8px 12px;
+        border:0;
+        border-radius:4px;
+        text-align:center;
+        font:caption;
+        cursor:pointer;
       }
     `
     },  ...opts };

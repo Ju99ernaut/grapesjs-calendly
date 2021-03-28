@@ -9,28 +9,20 @@ This plugin adds a Shape divider block with different svg shapes.
 
 ## Summary
 
-- Plugin name: `grapesjs-shape-divider`
+- Plugin name: `grapesjs-calendly`
 - Blocks
-  - `Shape Divider`
+  - `Calendly`
 
 ## Options
-
-| Option             | Description                 | Default                        |
-| ----------------   | --------------------------- | ------------------------------ |
-| `Shape`            | `Shape level`               | `Tilt`                         |
-| `category`         | `Category name`             | `Selection`                    |
-| `defaultTagName`   | `TagName by default`        | `svg`                          |
-| `Flip vertically`  | `Vertical position`         | `vertical`                     |
-| `Flip horizontally`|  `Horizontally`             | `horizontal`                   |
 
 ## Download
 
 - CDN
-  - `https://unpkg.com/grapesjs-shape-divider`
+  - `https://unpkg.com/grapesjs-calendly`
 - NPM
-  - `npm i grapesjs-shape-divider`
+  - `npm i grapesjs-calendly`
 - GIT
-  - `git clone https://github.com/Abhisheknanda1344463/grapesjs-shape-divider`
+  - `git clone https://github.com/Abhisheknanda1344463/grapesjs-calendly`
 
 ## Usage
 
@@ -40,7 +32,7 @@ This plugin adds a Shape divider block with different svg shapes.
   rel="stylesheet"
 />
 <script src="https://unpkg.com/grapesjs"></script>
-<script src="path/to/grapesjs-shape-divider.min.js"></script>
+<script src="path/to/grapesjs-calendly.min.js"></script>
 
 <div id="gjs"></div>
 
@@ -48,7 +40,7 @@ This plugin adds a Shape divider block with different svg shapes.
   var editor = grapesjs.init({
     container : '#gjs',
     ...
-    plugins: ['grapesjs-shape-divider']
+    plugins: ['grapesjs-calendly']
   });
 </script>
 ```
@@ -58,8 +50,8 @@ This plugin adds a Shape divider block with different svg shapes.
 Clone the repository
 
 ```sh
-$ git clone https://github.com/Abhisheknanda1344463/grapesjs-shape-divider
-$ cd grapesjs-shape-divider
+$ git clone https://github.com/Abhisheknanda1344463/grapesjs-calendly
+$ cd grapesjs-calendly
 ```
 
 Install dependencies
