@@ -15,9 +15,8 @@ export default (editor, opt = {}) => {
         name: 'calendly',
         droppable: false,
         resizable: false,
-        // // shape: 'none',
-        url: c.url,
-        // content: `
+        url: 'https://calendly.com/my-test',
+        bgcolor: '#ffffff',
         traits:[
           {
             name: 'url',
@@ -65,10 +64,10 @@ export default (editor, opt = {}) => {
                 r = "#ffffff".replace("#", "{[bgcolor]}");
                 i = "#4d5055".replace("#", "{[textcolor]}");
                 o = "#00a2ff".replace("#", "{[buttonlink]}");
-                // a = ["[{hdedetail}]"] == true ? "hide_event_type_details=1" : "", r ? "background_color=".concat(r) : "", i ? "textcolor=".concat(i) : "", o ? "primary_color=".concat(o) : ""]
-                //     .filter(function (t) {
-                //       return t;
-                //     }).join("&");
+                a = ["[{hdedetail}]" == true ? "hide_event_type_details=1" : "", r ? "background_color=".concat(r) : "", i ? "textcolor=".concat(i) : "", o ? "primary_color=".concat(o) : ""]
+                    .filter(function (t) {
+                      return t;
+                    }).join("&");
             e && e.addEventListener("click", function () {
               return window.Calendly.initPopupWidget({
                   url: "".concat(n, "?").concat(a),
