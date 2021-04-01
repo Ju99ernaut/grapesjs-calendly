@@ -1,44 +1,26 @@
 {
-  "name": "grapesjs-calendly",
-  "version": "0.3.15",
-  "description": "GrapesJS Shape Divider",
-  "main": "dist/grapesjs-calendly.min.js",
-  "scripts": {
-    "lint": "eslint src",
-    "v:patch": "npm version --no-git-tag-version patch",
-    "build": "npm run v:patch && webpack --env.production",
-    "start": "webpack-dev-server --open --progress --colors"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Abhisheknanda1344463/grapesjs-calendly.git"
-  },
-  "keywords": [
-    "grapesjs",
-    "plugin",
-    "boilerplate",
-    "wysiwyg"
-  ],
-  "author": "abhishek94",
-  "license": "BSD-3-Clause",
-  "babel": {
-    "presets": [
-      "@babel/env"
+    "name": "grapesjs-calendly",
+    "version": "0.3.15",
+    "description": "GrapesJS Shape Divider",
+    "main": "dist/grapesjs-calendly.min.js",
+    "scripts": {
+        "start": "grapesjs-cli serve",
+        "build": "grapesjs-cli build",
+        "bump": "npm version patch -m 'Bump v%s'"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Abhisheknanda1344463/grapesjs-calendly.git"
+    },
+    "keywords": [
+        "grapesjs",
+        "plugin",
+        "boilerplate",
+        "wysiwyg"
     ],
-    "plugins": [
-      "@babel/transform-runtime"
-    ]
-  },
-  "devDependencies": {
-    "@babel/core": "^7.4.3",
-    "@babel/plugin-transform-runtime": "^7.4.3",
-    "@babel/preset-env": "^7.4.3",
-    "@babel/runtime": "^7.4.3",
-    "babel-loader": "^8.0.5",
-    "eslint": "^5.16.0",
-    "html-webpack-plugin": "^3.2.0",
-    "webpack": "^4.30.0",
-    "webpack-cli": "^3.3.0",
-    "webpack-dev-server": "^3.3.1"
-  }
+    "author": "abhishek94",
+    "license": "BSD-3-Clause",
+    "devDependencies": {
+        "grapesjs-cli": "^1.0.15"
+    }
 }
