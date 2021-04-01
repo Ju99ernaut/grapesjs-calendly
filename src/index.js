@@ -1,34 +1,19 @@
-import grapesjs from 'grapesjs';
 import loadComponents from './components';
 import loadBlocks from './blocks';
-import styles from './styles';
 
-export default grapesjs.plugins.add('grapesjs-calendly', (editor, opts = {}) => {
-  const options = { ...{
-  // let c = opts;
-  //
-  // let defaults = {
-    calendlyBlock: {},
+export default (editor, opts = {}) => {
+  const options = {
+    ...{
+      // Extend calendly block
+      calendlyBlock: {},
 
-    // Default style
-    defaultStyle: true,
+      // category label
+      category: 'Extra',
 
-    // Section class prefix
-    sectionClsPfx: 'gjs',
+      //labelType
+      labelType: 'calendly',
 
-    // Shp-divder label
-    // labelShapeDvd: 'Shape Divider',
-
-    // Shp-divder category label
-    labelSectionCategory: 'Selection',
-
-    //Label Svg
-    labelSvg: 'svg',
-
-    //labelType
-    labelType: 'calendly',
-
-    style: `
+      style: `
       .gpd-calendly-btn-st{
         background-color:#3c9cde;
         color:#FFF;
@@ -40,14 +25,13 @@ export default grapesjs.plugins.add('grapesjs-calendly', (editor, opts = {}) => 
         cursor:pointer;
       }
     `
-    },  ...opts };
+    }, ...opts
+  };
+
   // Add components
   loadComponents(editor, options);
 
   // Add components
   loadBlocks(editor, options);
 
-  // Load Styles
-  styles(editor, options);
-
-});
+}
