@@ -1,122 +1,91 @@
 export default (editor, opt = {}) => {
-  const c = opt;
   const dc = editor.DomComponents;
   const type = 'calendly';
-  const defaultType = dc.getType('default');
-  const defaultModel = defaultType.model;
-  const defaultView = defaultType.view
- //  const {
- //    url
- // } = opt;
 
-  dc.addType('calendly', {
+  const script = ({ url, bgcolor, textcolor, buttonlink, hidedetail }) => {
+    var el = this;
+    function init() {
+      var btn = el.querySelector(".gpd-calendly-btn"),
+        bg = "#ffffff".replace("#", bgcolor),
+        text = "#4d5055".replace("#", textcolor),
+        link = "#00a2ff".replace("#", buttonlink),
+        config = [!!hidedetail ? "hide_event_type_details=1" : "",
+        bg ? "background_color=".concat(bg) : "",
+        text ? "textcolor=".concat(text) : "",
+        link ? "primary_color=".concat(link) : ""]
+          .filter(function (option) {
+            return option;
+          }).join("&");
+      btn && btn.addEventListener("click", function () {
+        return window.Calendly.initPopupWidget({
+          url: "".concat(url, "?").concat(config),
+        });
+      });
+    };
+    if (window.Calendly) init();
+    else {
+      var link = document.createElement("link");
+      link.href = "https://assets.calendly.com/assets/external/widget.css";
+      link.rel = "stylesheet";
+      document.head.appendChild(link);
+      var script = document.createElement("script");
+      script.src = "https://assets.calendly.com/assets/external/widget.js";
+      script.onload = init;
+      document.head.appendChild(script);
+    }
+  }
+
+  dc.addType(type, {
     model: {
       defaults: {
-        name: 'calendly',
+        name: type,
         droppable: false,
         resizable: false,
+        script,
         url: 'https://calendly.com/my-test',
         bgcolor: '#ffffff',
-        traits:[
+        textcolor: '#4d5055',
+        buttonlink: '#00a2ff',
+        hidedetail: false,
+        traits: [
           {
             name: 'url',
             label: 'Calendly URL',
             placeholder: 'https://calendly.com/my-test',
-            changeprop: 1,
+            default: 'https://calendly.com/my-test',
+            changeProp: true,
           },
           {
             name: 'bgcolor',
             label: 'Color background',
             type: 'color',
             default: '#ffffff',
-            changeprop:1,
+            changeProp: true,
           },
           {
             name: 'textcolor',
             label: 'Color text',
             type: 'color',
             default: '#4d5055',
-            changeprop:1,
+            changeProp: true,
           },
           {
             name: 'buttonlink',
             label: 'Button & Links',
             type: 'color',
             default: '#00a2ff',
-            changeprop:1,
+            changeProp: true,
           },
           {
             name: 'hidedetail',
             label: 'High Details',
             type: 'checkbox',
-            changeprop: 1
-
+            changeProp: true,
           }
         ],
-        init(){
-
-        },
-        script: function() {
-          var t = this;
-          e = function () {
-            var e = t.querySelector(".gpd-calendly-btn");
-                n = '{[ url ]}';
-                r = "#ffffff".replace("#", "{[bgcolor]}");
-                i = "#4d5055".replace("#", "{[textcolor]}");
-                o = "#00a2ff".replace("#", "{[buttonlink]}");
-                a = ["[{hdedetail}]" == true ? "hide_event_type_details=1" : "", r ? "background_color=".concat(r) : "", i ? "textcolor=".concat(i) : "", o ? "primary_color=".concat(o) : ""]
-                    .filter(function (t) {
-                      return t;
-                    }).join("&");
-            e && e.addEventListener("click", function () {
-              return window.Calendly.initPopupWidget({
-                  url: "".concat(n, "?").concat(a),
-              });
-            });
-          };
-          if (window.Calendly) e();
-          else {
-              var n = document.createElement("link");
-              (n.href = "https://assets.calendly.com/assets/external/widget.css"), (n.rel = "stylesheet"), document.head.appendChild(n);
-              var r = document.createElement("script");
-              (r.src = "https://assets.calendly.com/assets/external/widget.js"), (r.onload = e), document.head.appendChild(r);
-          }
-        }
+        'script-props': ['url', 'bgcolor', 'textcolor', 'buttonlink', 'hidedetail'],
       },
-        // script: `var t = this,
-        //     e = function () {
-        //         var e = t.querySelector(".gpd-calendly-btn"),
-        //             n = '{[ url ]}',
-        //             r = "#ffffff".replace("#", ""),
-        //             i = "#4d5055".replace("#", ""),
-        //             o = "#00a2ff".replace("#", ""),
-        //             a = ["" == "true" ? "hide_event_type_details=1" : "", r ? "background_color=".concat(r) : "", i ? "text_color=".concat(i) : "", o ? "primary_color=".concat(o) : ""]
-        //                 .filter(function (t) {
-        //                     return t;
-        //                 })
-        //                 .join("&");
-        //         e &&
-        //             e.addEventListener("click", function () {
-        //                 return window.Calendly.initPopupWidget({
-        //                     url: "".concat(n, "?").concat(a),
-        //                 });
-        //             });
-        //     };
-        // if (window.Calendly) e();
-        // else {
-        //     var n = document.createElement("link");
-        //     (n.href = "https://assets.calendly.com/assets/external/widget.css"), (n.rel = "stylesheet"), document.head.appendChild(n);
-        //     var r = document.createElement("script");
-        //     (r.src = "https://assets.calendly.com/assets/external/widget.js"), (r.onload = e), document.head.appendChild(r);
-        // }`,
-      // },
-    },
-    view: defaultView.extend({
-      init() {
-        this.listenTo(this.model, 'change:url', this.updateScript);
-        const comps = this.model.get('components');
-      }
-    })
+    }
   });
 
   dc.addType('calendly-btn', {
@@ -128,17 +97,12 @@ export default (editor, opt = {}) => {
         resizable: false,
         removable: false,
         copyable: false,
-        // // shape: 'none',
-        // content: `
-        traits:[
-          ...dc.getType('default').model.prototype.defaults.traits,
-        ]
       },
     },
     extend: 'link',
-    isComponent: function (el) {
+    isComponent(el) {
       if (el.tagName === 'calendly-btn')
-        return {type: 'calendly-btn'};
+        return { type: 'calendly-btn' };
     }
   });
 }
