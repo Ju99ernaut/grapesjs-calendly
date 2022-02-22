@@ -1,7 +1,7 @@
 {
     "name": "grapesjs-calendly",
-    "version": "0.3.15",
-    "description": "GrapesJS Shape Divider",
+    "version": "0.3.16",
+    "description": "GrapesJS Calendly Component",
     "main": "dist/grapesjs-calendly.min.js",
     "scripts": {
         "start": "grapesjs-cli serve",
