@@ -1,8 +1,9 @@
+import { type } from './consts';
+
 export default (editor, opt = {}) => {
   const dc = editor.DomComponents;
-  const type = 'calendly';
 
-  const script = ({ url, bgcolor, textcolor, buttonlink, hidedetail }) => {
+  function script({ url, widgettype, bgcolor, textcolor, buttonlink, hidedetail }) {
     var el = this;
     function init() {
       var btn = el.querySelector(".gpd-calendly-btn"),
@@ -16,11 +17,19 @@ export default (editor, opt = {}) => {
           .filter(function (option) {
             return option;
           }).join("&");
-      btn && btn.addEventListener("click", function () {
-        return window.Calendly.initPopupWidget({
-          url: "".concat(url, "?").concat(config),
+      if (widgettype === 'popup') {
+        btn && btn.addEventListener("click", function () {
+          return window.Calendly.initPopupWidget({
+            url: "".concat(url, "?").concat(config),
+          });
         });
-      });
+      } else {
+        btn && (btn.style.display = 'none');
+        window.Calendly.initInlineWidget({
+          url: "".concat(url, "?").concat(config),
+          parentElement: el
+        });
+      }
     };
     if (window.Calendly) init();
     else {
@@ -39,10 +48,15 @@ export default (editor, opt = {}) => {
     model: {
       defaults: {
         name: type,
+        icon: '<svg viewBox="0 0 24 24"><path d="M14 14H7v2h7m5 3H5V8h14m0-5h-1V1h-2v2H8V1H6v2H5a2 2 0 0 0-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2m-2 7H7v2h10v-2z"></path></svg>',
         droppable: false,
         resizable: false,
         script,
-        url: 'https://calendly.com/my-test',
+        attributes: {
+          style: 'font-family: Helvetica'
+        },
+        url: 'https://calendly.com/blocomposer',
+        widgettype: 'popup',
         bgcolor: '#ffffff',
         textcolor: '#4d5055',
         buttonlink: '#00a2ff',
@@ -53,6 +67,17 @@ export default (editor, opt = {}) => {
             label: 'Calendly URL',
             placeholder: 'https://calendly.com/my-test',
             default: 'https://calendly.com/my-test',
+            changeProp: true,
+          },
+          {
+            name: 'widgettype',
+            label: 'Type',
+            type: 'select',
+            options: [
+              { value: 'inline', name: 'inline' },
+              { value: 'popup', name: 'popup' }
+            ],
+            default: 'popup',
             changeProp: true,
           },
           {
@@ -83,7 +108,7 @@ export default (editor, opt = {}) => {
             changeProp: true,
           }
         ],
-        'script-props': ['url', 'bgcolor', 'textcolor', 'buttonlink', 'hidedetail'],
+        'script-props': ['url', 'widgettype', 'bgcolor', 'textcolor', 'buttonlink', 'hidedetail'],
       },
     }
   });
@@ -92,6 +117,7 @@ export default (editor, opt = {}) => {
     model: {
       defaults: {
         name: 'calendly',
+        icons: '<i className="fa fa-link"></i>',
         droppable: false,
         highlightable: false,
         resizable: false,
