@@ -17,7 +17,7 @@ This plugin adds calendly embed widgets to grapesjs.
 - NPM
   - `npm i grapesjs-calendly`
 - GIT
-  - `git clone https://github.com/Abhisheknanda1344463/grapesjs-calendly`
+  - `git clone https://github.com/Ju99ernaut/grapesjs-calendly`
 
 ## Usage
 
@@ -45,7 +45,7 @@ This plugin adds calendly embed widgets to grapesjs.
 Clone the repository
 
 ```sh
-$ git clone https://github.com/Abhisheknanda1344463/grapesjs-calendly
+$ git clone https://github.com/Ju99ernaut/grapesjs-calendly
 $ cd grapesjs-calendly
 ```
 
