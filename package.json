@@ -1,6 +1,6 @@
 {
     "name": "grapesjs-calendly",
-    "version": "0.3.16",
+    "version": "0.3.17",
     "description": "GrapesJS Calendly Component",
     "main": "dist/grapesjs-calendly.min.js",
     "scripts": {
