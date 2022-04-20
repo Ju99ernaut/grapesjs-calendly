@@ -3,17 +3,14 @@ import { type } from './consts';
 export default (editor, opt = {}) => {
   const dc = editor.DomComponents;
 
-  function script({ url, widgettype, bgcolor, textcolor, buttonlink, hidedetail }) {
+  function script({ url, widgettype, badgetext, bgcolor, textcolor, buttonlink, hidedetail, branding }) {
     var el = this;
     function init() {
       var btn = el.querySelector(".gpd-calendly-btn"),
-        bg = "#ffffff".replace("#", bgcolor),
-        text = "#4d5055".replace("#", textcolor),
-        link = "#00a2ff".replace("#", buttonlink),
         config = [!!hidedetail ? "hide_event_type_details=1" : "",
-        bg ? "background_color=".concat(bg) : "",
-        text ? "textcolor=".concat(text) : "",
-        link ? "primary_color=".concat(link) : ""]
+        "background_color=".concat(bgcolor),
+        "text_color=".concat(textcolor),
+        "primary_color=".concat(buttonlink)]
           .filter(function (option) {
             return option;
           }).join("&");
@@ -21,14 +18,26 @@ export default (editor, opt = {}) => {
         btn && btn.addEventListener("click", function () {
           return window.Calendly.initPopupWidget({
             url: "".concat(url, "?").concat(config),
+            branding: !!branding
           });
         });
       } else {
         btn && (btn.style.display = 'none');
-        window.Calendly.initInlineWidget({
-          url: "".concat(url, "?").concat(config),
-          parentElement: el
-        });
+        if (widgettype === 'inline') {
+          window.Calendly.initInlineWidget({
+            url: "".concat(url, "?").concat(config),
+            parentElement: el,
+            branding: !!branding
+          });
+        } else {
+          window.Calendly.initBadgeWidget({
+            url: "".concat(url, "?").concat(config),
+            text: badgetext || "Schedule meeting",
+            textColor: textcolor,
+            color: bgcolor,
+            branding: !!branding
+          });
+        }
       }
     };
     if (window.Calendly) init();
@@ -57,9 +66,11 @@ export default (editor, opt = {}) => {
         },
         url: 'https://calendly.com/blocomposer',
         widgettype: 'popup',
+        badgetext: 'Schedule time with me',
         bgcolor: '#ffffff',
         textcolor: '#4d5055',
         buttonlink: '#00a2ff',
+        branding: true,
         hidedetail: false,
         traits: [
           {
@@ -74,10 +85,24 @@ export default (editor, opt = {}) => {
             label: 'Type',
             type: 'select',
             options: [
-              { value: 'inline', name: 'inline' },
-              { value: 'popup', name: 'popup' }
+              { value: 'inline' },
+              { value: 'popup' },
+              { value: 'popup-text' }
             ],
             default: 'popup',
+            changeProp: true,
+          },
+          {
+            name: 'badgetext',
+            label: 'Badge Text',
+            placeholder: 'Schedule time with me',
+            default: 'Schedule time with me',
+            changeProp: true,
+          },
+          {
+            name: 'branding',
+            label: 'Badge Branding',
+            type: 'checkbox',
             changeProp: true,
           },
           {
@@ -103,12 +128,12 @@ export default (editor, opt = {}) => {
           },
           {
             name: 'hidedetail',
-            label: 'High Details',
+            label: 'Hide Details',
             type: 'checkbox',
             changeProp: true,
           }
         ],
-        'script-props': ['url', 'widgettype', 'bgcolor', 'textcolor', 'buttonlink', 'hidedetail'],
+        'script-props': ['url', 'widgettype', 'badgetext', 'bgcolor', 'textcolor', 'buttonlink', 'hidedetail', 'branding'],
       },
     }
   });
