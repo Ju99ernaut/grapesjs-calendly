@@ -2,6 +2,8 @@
 
 This plugin adds calendly embed widgets to grapesjs.
 
+[DEMO](https://blocomposer.com)
+
 ## Summary
 
 - Plugin name: `grapesjs-calendly`
